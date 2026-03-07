@@ -8,14 +8,11 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, getRedirectResult }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getDatabase, ref, set, get, push, onValue, serverTimestamp, query, orderByChild, limitToLast, off }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-    // ════════════════════════════════════════════════════
-    //  PASTE YOUR FIREBASE CONFIG OBJECT HERE (Step 3)
-    // ════════════════════════════════════════════════════
     const firebaseConfig = {
       apiKey: "AIzaSyBbjfneqbFgbqZr8pDN2ysARvD3FY8TV7E",
       authDomain: "reach-dc079.firebaseapp.com",
@@ -25,12 +22,12 @@
       messagingSenderId: "830909398821",
       appId: "1:830909398821:web:b74eb2650fa31bdabc24cc"
     };
-    // ════════════════════════════════════════════════════
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getDatabase(app);
     const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
 
     let currentUser = null;
     let activeConvId = null;
